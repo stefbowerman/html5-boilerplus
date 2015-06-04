@@ -9,6 +9,7 @@ HTML5 Boilerplate plus extra goodies (gulp, scss, browserify, livereload, etc)
 - JS is compiled using browserify.  The entry path is app.js, include files and components using ```require()```.  Any files that need to be included outside this file should be placed in the lib directory, they will be copied over directly and can be referenced in the html as ``` <script type="text/javascript" src="/js/lib/<file_name>"></script>  ```
 - CSS is compiled with SCSS.  The entry path is app.scss
 - HTML can be broken into static blocks and included using ```@@include()``` which is provided by the ```gulp-file-include``` node package.
+
 #### Adding Packages
 - Dependencies should be included in the project repo unless they are used exclusively for development
 - To add a development dependency, run ```npm install --save-dev <package_name>``` and then add ```node_modules/<package_name>``` to ```.gitignore```.  This will add it to our devDependencies inside ```package.json``` but exclude it from the git repo
