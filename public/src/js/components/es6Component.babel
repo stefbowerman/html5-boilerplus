@@ -1,0 +1,18 @@
+class ES6Module {
+  constructor(){
+
+  }
+
+  appendText(text) {
+    var div = document.createElement("div"); 
+    var inner = document.createTextNode(text); 
+    
+    div.appendChild(inner);
+    
+    document.body.appendChild(div);
+
+    return this;
+  }
+}
+
+module.exports = new ES6Module;
