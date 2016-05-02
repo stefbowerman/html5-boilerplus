@@ -7,20 +7,22 @@ var manifest     = require('asset-builder')('./manifest.json')
 var paths        = manifest.paths;
 var config       = manifest.config || {};
 
-var options      = {};
+module.exports = function(){
+  
+  var options      = {};
 
-if( config.hasOwnProperty('devUrl') ){
+  if( config.hasOwnProperty('devUrl') ){
 
-  options.proxy = config.devUrl;
+    options.proxy = config.devUrl;
 
-} else {
+  } else {
 
-  options.server = {
-    baseDir : paths.dist  
+    options.server = {
+      baseDir : paths.dist  
+    }
+
   }
 
-}
+  return browserSync.init( options );
 
-module.exports = function(){
-  browserSync.init( options );
 };

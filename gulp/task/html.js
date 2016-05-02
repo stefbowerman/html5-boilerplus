@@ -12,6 +12,7 @@ var paths       = require('asset-builder')('./manifest.json').paths;
 module.exports = function(){
   gulp.src([
     paths.source + '**/*{html,.,xml,txt}', // Add more extensions as needed, files will be copied over in place to the dist directory
+    paths.source + '.htaccess', // Because I suck and don't want to figure how to sneak this into the glob in the above line
     '!' + paths.source + 'partials{,/**}' // Do not include the partials directory, only used for file includes
   ])
   .pipe(fileInclude({

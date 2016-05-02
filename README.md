@@ -1,9 +1,10 @@
 # HTML5 Boiler+ :nail_care:
+
 A full project HTML5 boilerplate plus extra goodies (gulp, scss, browserify, es6 compilation, browserSync, etc) to get you up and running fast.
 
 ### Development
 - All development is done in the ``/public/src`` directory
-- Running ``gulp watch`` launches a server and starts watching all files in the src directory.
+- Running ``gulp start-dev`` launches a server and starts watching all files in the src directory.
 - Changes are injected live using BrowserSync
 - JS is compiled using browserify.  The entry path is app.js, include files and components using ``require()``.  Any files that need to be included outside this file should be placed in the lib directory, they will be copied over directly and can be referenced in the html as ``<script type="text/javascript" src="/js/lib/<file_name>"></script>``
 - CSS is compiled with SCSS.  The entry path is app.scss

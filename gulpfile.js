@@ -48,12 +48,20 @@ gulp.task('build', function(callback){
 // changes across devices. When a modification is made to an asset, run the
 // build step for that asset and inject the changes into the page.
 // See: http://www.browsersync.io
-gulp.task('watch', ['server'], function(){
+gulp.task('watch', function(){
   gulp.watch([paths.source + 'scss/**/*'], ['styles']);
-  gulp.watch([paths.source + 'js/**/*'],   ['scripts']);
   gulp.watch([paths.source + '**/*{html,.,xml,txt}'], ['html']);
   gulp.watch([paths.source + 'images/**/*'], ['images']);
   gulp.watch([paths.source + 'fonts/**/*'], ['fonts']);
+});
+
+// ## Start Development
+// `gulp start-dev` - Only need to be run once when starting a dev session.  First compiles scripts and watches
+// them using watchify (a browserify plugin) for incremental building instead of a full-dumb build (taking up to 30s)
+// Starts the dev server and then watches all project files for changes.
+gulp.task('start-dev', function(){
+  // We need to run scripts before anything because 
+  runSequence('scripts', 'server', 'watch');
 });
 
 // ### Gulp
