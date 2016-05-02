@@ -1,2 +1,14 @@
 @import "variables";
 @import "normalize";
+
+$bg: #C77A69 !default;
+
+body {
+  background-color: $bg;
+  color: white;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-size: 1.5rem;
+  font-family: Monaco;
+  transition: all 250ms ease-in-out; // Will be prefixed with gulp 'style' task
+}

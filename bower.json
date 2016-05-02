@@ -1,0 +1,18 @@
+{
+  "name": "html5-boilerplus",
+  "description": "HTML5 Boilerplate with extra goodies",
+  "main": "./",
+  "authors": [
+    "Stefan Bowerman"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/stefbowerman/html5-boilerplus",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
