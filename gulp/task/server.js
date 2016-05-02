@@ -7,7 +7,6 @@ var manifest     = require('asset-builder')('./manifest.json')
 var paths        = manifest.paths;
 var config       = manifest.config || {};
 
-
 module.exports = function(){
   
   var options      = {};
@@ -25,4 +24,5 @@ module.exports = function(){
   }
 
   return browserSync.init( options );
+
 };

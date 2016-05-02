@@ -1,13 +1,14 @@
 # HTML5 Boiler+ :nail_care:
-A full project HTML5 boilerplate plus extra goodies (gulp, scss, browserify, browserSync, etc) to get you up and running fast.
+
+A full project HTML5 boilerplate plus extra goodies (gulp, scss, browserify, es6 compilation, browserSync, etc) to get you up and running fast.
 
 ### Development
 - All development is done in the ``/public/src`` directory
 - Running ``gulp start-dev`` launches a server and starts watching all files in the src directory.
 - Changes are injected live using BrowserSync
-- JS is compiled using browserify and hot recompiled using watchify.  The entry path is app.js, include files and components using ``require()``.  Any files that need to be included outside this file should be placed in the lib directory, they will be copied over directly and can be referenced in the html as ``<script type="text/javascript" src="/js/lib/<file_name>"></script>``
+- JS is compiled using browserify.  The entry path is app.js, include files and components using ``require()``.  Any files that need to be included outside this file should be placed in the lib directory, they will be copied over directly and can be referenced in the html as ``<script type="text/javascript" src="/js/lib/<file_name>"></script>``
 - CSS is compiled with SCSS.  The entry path is app.scss
-- HTML can be broken into static blocks and included using ```@@include()``` which is provided by the ``gulp-file-include`` node package.
+- HTML can be broken into static blocks (with logic-less variables) and included using ```@@include()``` which is provided by the [``gulp-file-include``](https://www.npmjs.com/package/gulp-file-include) node package.
 
 ##### Adding Packages
 - Dependencies should be included in the project repo unless they are used exclusively for development

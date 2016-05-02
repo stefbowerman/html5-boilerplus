@@ -3,7 +3,7 @@
     // Use a module installed using npm and listed in the mode_modules directory
     var _ = require('underscore');
 
-    console.log(_.now());
+    console.log("Current timestamp = " + _.now());
 
     // Use a module by passing the path to the file
     var Greeter = require('./components/greeter.js');
