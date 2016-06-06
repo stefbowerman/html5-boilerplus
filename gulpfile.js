@@ -27,20 +27,21 @@ var config = manifest.config || {};
 // - `globs.bower` - Array of all the main Bower files.
 var globs = manifest.globs;
 
-gulp.task('html'   , require('./gulp/task/html'));
-gulp.task('jshint' , require('./gulp/task/jshint'));
-gulp.task('scripts', require('./gulp/task/scripts'));
-gulp.task('server' , require('./gulp/task/server'));
-gulp.task('styles' , require('./gulp/task/styles'));
-gulp.task('clean'  , require('./gulp/task/clean'));
-gulp.task('images' , require('./gulp/task/images'));
-gulp.task('fonts'  , require('./gulp/task/fonts'));
+gulp.task('html'       , require('./gulp/task/html'));
+gulp.task('jshint'     , require('./gulp/task/jshint'));
+gulp.task('scripts'    , require('./gulp/task/scripts'));
+gulp.task('scripts-lib', require('./gulp/task/scripts-lib'));
+gulp.task('server'     , require('./gulp/task/server'));
+gulp.task('styles'     , require('./gulp/task/styles'));
+gulp.task('clean'      , require('./gulp/task/clean'));
+gulp.task('images'     , require('./gulp/task/images'));
+gulp.task('fonts'      , require('./gulp/task/fonts'));
 
 // ### Build
 // `gulp build` - Run all the build tasks but don't clean up beforehand.
 // Generally you should be running `gulp` instead of `gulp build`.
 gulp.task('build', function(callback){
-  runSequence('styles', 'scripts', 'html', 'images', callback);
+  runSequence('styles', 'scripts', 'scripts-lib', 'html', 'images', 'fonts', callback);
 });
 
 // ### Watch
@@ -53,6 +54,7 @@ gulp.task('watch', function(){
   gulp.watch([paths.source + '**/*{html,.,xml,txt}'], ['html']);
   gulp.watch([paths.source + 'images/**/*'], ['images']);
   gulp.watch([paths.source + 'fonts/**/*'], ['fonts']);
+  gulp.watch([paths.source + 'js/lib/*'], ['scripts-lib']);
 });
 
 // ## Start Development

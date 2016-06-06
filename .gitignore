@@ -1,6 +1,7 @@
-.bin
-.sass-cache
 .DS_Store
+.bin
+.sass*
+*.map
 
 # Exclude all modules
 node_modules/

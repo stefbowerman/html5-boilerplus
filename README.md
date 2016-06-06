@@ -35,4 +35,4 @@ Now you can require scrollmagic with ```require('scrollmagic')```
 - The default gulp task deletes everything in the ``/public/dist`` directory and runs a complete build.
 - Adding the ``--production`` flag to a gulp task command will run it in production mode which will remove sourcemaps.
 - Production project directory is ``/public/dist``.  This is the only directory that needs to be uploaded to view the site.
-- If the entire project is uploaded to the root directory, the .htaccess file must be used to rewrite the root url to the /public/dist subdirectory
+- If the entire project is uploaded to the root directory, the .htaccess file must be used to rewrite the root url to the ``/public/dist`` subdirectory
