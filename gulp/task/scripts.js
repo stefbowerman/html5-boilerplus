@@ -5,6 +5,7 @@ var source      = require('vinyl-source-stream');
 var buffer      = require('vinyl-buffer');
 var browserify  = require('browserify');
 var babelify    = require('babelify');
+var watchify    = require('watchify');
 var merge       = require('merge-stream');
 var browserSync = require('browser-sync');
 var sourcemaps  = require('gulp-sourcemaps');
@@ -26,19 +27,41 @@ module.exports = function(){
   var merged = merge();
 
   manifest.forEachDependency('js', function(dependency){
-
-    // Run browserify + sourcemaps + etc on each dependency
-    merged.add(
-      browserify({
+    
+    var bundler = browserify({
         entries: dependency.globs,
         extensions: [".babel", ".js"],
-        debug: true
-      })
-      .transform(babelify, {
+        debug: true,
+        cache: {},
+        packageCache: {},
+        plugin: [watchify]
+      });
+
+    var doBundle = function(){
+
+      gutil.log(
+        gutil.colors.magenta("Starting bundle for:"),
+        dependency.name
+      );
+      
+      // Run browserify + sourcemaps + etc on each dependency
+      return bundler.transform(babelify, {
         presets: ["es2015"],
         extensions: [".babel"]
       })
-      .bundle()
+      .bundle(function(err, buf){
+          if (err){
+            gutil.log(
+              gutil.colors.red("Bundle error:"),
+              err.toString()
+            )
+          } else {
+            gutil.log(
+              gutil.colors.green("Finished bundle for:"),
+              dependency.name
+            )
+          }
+      })
       .on('error', onBundleError)
       .pipe(source(dependency.name)) // .pipe(source('app.js'))
       .pipe(buffer())
@@ -51,20 +74,20 @@ module.exports = function(){
           sourceRoot: paths.source + 'js/'
         }))
       )
-      .pipe(gulp.dest(paths.dist + 'js'))
-    )
+      .pipe(gulp.dest(paths.dist + 'js'));
+    }
+
+    var doBundleUpdate = function(){
+      gutil.log('Running bundle update');
+      var stream = doBundle();
+      return stream.pipe(browserSync.stream());
+    }
+
+    bundler.on('update', doBundleUpdate);
+
+    merged.add( doBundle() );
 
   });
-
-  // Copy libs over as they are
-  merged.add(
-    gulp.src([
-      paths.source + '/js/lib/**/*'
-    ])
-    .pipe(
-      gulp.dest(paths.dist + '/js/lib/')
-    )
-  );
 
   return merged.pipe(browserSync.stream());
 
